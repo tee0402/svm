@@ -5,11 +5,11 @@ from sklearn.svm import SVC
 import random
 
 
-def random_stocks(N=10):
+def random_stocks(n=10):
     filename = 'stocks.txt'
     with open(filename) as file:
         stocks = np.array(file.read().split('\n'))
-    picks = [random.randrange(6145) for i in range(N)]
+    picks = [random.randrange(6145) for i in range(n)]
     return stocks[picks]
 
 
