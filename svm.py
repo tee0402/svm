@@ -2,14 +2,15 @@ from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.svm import SVC
+import random
 
 
 def random_stocks(N=10):
-    stocks = []
-    with open('stocks.txt') as file:
-        for line in file:
-            stocks.append(line)
-    return stocks
+    filename = 'stocks.txt'
+    with open(filename) as file:
+        stocks = np.array(file.read().split('\n'))
+    picks = [random.randrange(6145) for i in range(N)]
+    return stocks[picks]
 
 
 def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
@@ -30,9 +31,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     plt.ylim(xx2.min(), xx2.max())
 
     for idx, cl in enumerate(np.unique(y)):
-        plt.scatter(x=X[y == cl, 0], y=X[y == cl, 1],
-                    alpha=0.8, c=cmap(idx),
-                    marker=markers[idx], label=cl)
+        plt.scatter(x=X[y == cl, 0], y=X[y == cl, 1], alpha=0.8, c=cmap(idx), marker=markers[idx], label=cl)
 
     X_test, y_test = X[test_idx, :], y[test_idx]
 
