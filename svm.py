@@ -20,8 +20,8 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     cmap = ListedColormap(colors[:len(np.unique(y))])
 
     # plot the decision surface
-    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    x1_min, x1_max = X[:, 0].min() - 10, X[:, 0].max() + 10
+    x2_min, x2_max = X[:, 1].min() - 10, X[:, 1].max() + 10
     xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),
                            np.arange(x2_min, x2_max, resolution))
     Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
@@ -35,30 +35,30 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 
     X_test, y_test = X[test_idx, :], y[test_idx]
 
-    plt.scatter(X_test[:, 0], X_test[:, 1], c='', alpha=1.0, linewidths=1, marker='o', s=55, label='test set')
+    plt.scatter(X_test[:, 0], X_test[:, 1], c='', alpha=1.0, linewidths=1, marker='o', s=55)
 
 
 print(random_stocks())
 print("['ECL' 'AEP' 'AVY' 'CELG' 'DGX' 'AYI' 'MCK' 'ITW' 'AIV' 'XL' "
       "'AON' 'PNR' 'MTD' 'TWX' 'LNT' 'DTE' 'MKC' 'TXN' 'NDAQ' 'DHI']")
 np.random.seed(0)
-X_xor = np.array([[1.944, 0.9995], [1.184, 0.7647], [1.784, 0.9793], [1.402, 3.614], [0.2156, 1.57], [1.284, 1.967], [1.844, 1.116], [2.995, 1.774], [0.371, 0.5136], [0.0174, 3.292],
-                  [0.7359, 1.097], [0.152, 2.133], [2.939, 1.524], [0.6047, 1.759], [8.412, 0.6995], [0.5369, 1.318], [1.486, 1.094], [1.322, 3.309], [0.6811, 1.072], [0.7796, 6.639]])
-y_xor = np.array([-1, 1, 1, -1, -1, -1, -1, 1, -1, -1,
-                  1, 1, 1, -1, 1, 1, -1, 1, 1, 1])
+X_xor = np.array([[2.244, 1.445], [0.2887, 0.684], [1.087, 1.137], [0.4234, 3.986], [0.2307, 1.375], [1.916, 2.135], [0.3194, 1.113], [0.5269, 2.613], [-0.9164, 0.7491], [0.8687, 6.473],
+                  [3.836, 1.125], [1.376, 1.754], [1.602, 1.510], [1.793, 1.430], [3.227, 1.088], [0.7805, 1.182], [5.668, 1.351], [14.43, 2.506], [1.056, 1.651], [0.0069, 5.416]])
+y_xor = np.array([-1, -1, 1, 1, -1, 1, -1, 1, -1, -1,
+                  1, -1, 1, 1, 1, 1, -1, 1, 1, 1])
 
 plt.scatter(X_xor[y_xor == 1, 0],
             X_xor[y_xor == 1, 1],
             c='b', marker='x',
-            label='1')
+            label='Beat the S&P 500')
 plt.scatter(X_xor[y_xor == -1, 0],
             X_xor[y_xor == -1, 1],
             c='r',
             marker='s',
-            label='-1')
+            label='Lost to the S&P 500')
 
-plt.xlim(-1, 4)
-plt.ylim(-1, 4)
+plt.xlim(-1, 15)
+plt.ylim(-1, 15)
 plt.legend(loc='best')
 plt.tight_layout()
 plt.show()
@@ -67,11 +67,12 @@ plt.show()
 svm = SVC()
 # Train the classifier
 svm.fit(X_xor, y_xor)
+print(svm.predict([[0.7478, 1.467]]))
 
 # Visualize the decision boundaries
 plot_decision_regions(X_xor, y_xor, classifier=svm)
-plt.xlim(-1, 4)
-plt.ylim(-1, 4)
+plt.xlim(-1, 15)
+plt.ylim(-1, 15)
 plt.legend(loc='upper left')
 plt.tight_layout()
 plt.show()
