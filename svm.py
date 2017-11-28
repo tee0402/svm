@@ -9,7 +9,7 @@ def random_stocks(n=10):
     filename = 'stocks.txt'
     with open(filename) as file:
         stocks = np.array(file.read().split('\n'))
-    picks = [random.randrange(6145) for i in range(n)]
+    picks = [random.randrange(505) for i in range(n)]
     return stocks[picks]
 
 
@@ -39,11 +39,13 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 
 
 print(random_stocks())
+print("['ECL' 'AEP' 'AVY' 'CELG' 'DGX' 'AYI' 'MCK' 'ITW' 'AIV' 'XL' "
+      "'AON' 'PNR' 'MTD' 'TWX' 'LNT' 'DTE' 'MKC' 'TXN' 'NDAQ' 'DHI']")
 np.random.seed(0)
-X_xor = np.random.randn(200, 2)
-y_xor = np.logical_xor(X_xor[:, 0] > 0,
-                       X_xor[:, 1] > 0)
-y_xor = np.where(y_xor, 1, -1)
+X_xor = np.array([[1.944, 0.9995], [1.184, 0.7647], [1.784, 0.9793], [1.402, 3.614], [0.2156, 1.57], [1.284, 1.967], [1.844, 1.116], [2.995, 1.774], [0.371, 0.5136], [0.0174, 3.292],
+                  [0.7359, 1.097], [0.152, 2.133], [2.939, 1.524], [0.6047, 1.759], [8.412, 0.6995], [0.5369, 1.318], [1.486, 1.094], [1.322, 3.309], [0.6811, 1.072], [0.7796, 6.639]])
+y_xor = np.array([-1, 1, 1, -1, -1, -1, -1, 1, -1, -1,
+                  1, 1, 1, -1, 1, 1, -1, 1, 1, 1])
 
 plt.scatter(X_xor[y_xor == 1, 0],
             X_xor[y_xor == 1, 1],
@@ -55,19 +57,21 @@ plt.scatter(X_xor[y_xor == -1, 0],
             marker='s',
             label='-1')
 
-plt.xlim([-3, 3])
-plt.ylim([-3, 3])
+plt.xlim(-1, 4)
+plt.ylim(-1, 4)
 plt.legend(loc='best')
 plt.tight_layout()
 plt.show()
 
 # Create a SVC classifier using an RBF kernel
-svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=1)
+svm = SVC()
 # Train the classifier
 svm.fit(X_xor, y_xor)
 
 # Visualize the decision boundaries
 plot_decision_regions(X_xor, y_xor, classifier=svm)
+plt.xlim(-1, 4)
+plt.ylim(-1, 4)
 plt.legend(loc='upper left')
 plt.tight_layout()
 plt.show()
