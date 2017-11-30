@@ -40,7 +40,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 
 print(random_stocks())
 print("['ECL' 'AEP' 'AVY' 'CELG' 'DGX' 'AYI' 'MCK' 'ITW' 'AIV' 'XL' "
-      "'AON' 'PNR' 'MTD' 'TWX' 'LNT' 'DTE' 'MKC' 'TXN' 'NDAQ' 'DHI']")
+      "'AON' 'PNR' 'MTD' 'TWX' 'LNT' 'DTE' 'MKC' 'TXN' 'SO' 'JCI']")
 np.random.seed(0)
 X_xor = np.array([[1.944, 0.9995], [1.184, 0.7647], [1.784, 0.9793], [1.402, 3.614], [0.2156, 1.57], [1.284, 1.967], [1.844, 1.116], [2.995, 1.774], [0.371, 0.5136], [0.0174, 3.292],
                   [0.7359, 1.097], [0.152, 2.133], [2.939, 1.524], [0.6047, 1.759], [8.412, 0.6995], [0.5369, 1.318], [1.486, 1.094], [1.322, 3.309], [0.6811, 1.072], [0.7796, 6.639]])
