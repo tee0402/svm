@@ -69,9 +69,9 @@ plt.show()
 svm = SVC()
 # Train the classifier
 svm.fit(X_xor, y_xor)
-print("['ROST' 'ALL' 'CBS' 'TGT' 'GILD' 'FCX' 'ES' 'KMB' 'NDAQ' 'DHI']")
-print('[1 1 -1 -1 -1 -1 -1 -1 1 1]')
-print(svm.predict([[0.7478, 1.467], [0.0116, 9.828], [0.4515, 1.580], [2.581, 1.177], [3.790, 1.224], [1.822, 3.232], [18.39, 0.5628], [2.468, 1.150], [1.056, 1.651], [0.0069, 5.416]]))
+print("['ROST' 'ALL' 'CBS' 'TGT' 'GILD' 'FCX' 'ES' 'PFG' 'NDAQ' 'DHI']")
+print('[1 1 -1 -1 -1 -1 -1 1 1 1]')
+print(svm.predict([[0.7478, 1.467], [0.0116, 9.828], [0.4515, 1.580], [2.581, 1.177], [3.790, 1.224], [1.822, 3.232], [18.39, 0.5628], [0.6623, 98.89], [1.056, 1.651], [0.0069, 5.416]]))
 
 # Visualize the decision boundaries
 plot_decision_regions(X_xor, y_xor, classifier=svm)
