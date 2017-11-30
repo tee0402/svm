@@ -59,10 +59,10 @@ plt.scatter(X_xor[y_xor == -1, 0],
 
 plt.xlabel('PEG Ratio')
 plt.ylabel('Current Ratio')
+plt.suptitle('Five Year Returns')
 plt.xlim(-1, 12)
 plt.ylim(0, 7)
 plt.legend(loc='best')
-plt.tight_layout()
 plt.show()
 
 # Create a SVC classifier using an RBF kernel
@@ -78,8 +78,8 @@ print(svm.predict([[2.303, 1.523], [0.613, 8.620], [1.28, 1.762], [2.787, 1.016]
 plot_decision_regions(X_xor, y_xor, classifier=svm)
 plt.xlabel('PEG Ratio')
 plt.ylabel('Current Ratio')
+plt.suptitle('Five Year Returns')
 plt.xlim(-1, 12)
 plt.ylim(0, 7)
 plt.legend(loc='upper left')
-plt.tight_layout()
 plt.show()
