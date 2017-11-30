@@ -31,21 +31,21 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     plt.ylim(xx2.min(), xx2.max())
 
     for idx, cl in enumerate(np.unique(y)):
-        plt.scatter(x=X[y == cl, 0], y=X[y == cl, 1], alpha=0.8, c=cmap(idx), marker=markers[idx], label=cl)
+        plt.scatter(x=X[y == cl, 0], y=X[y == cl, 1], alpha=0.8, c=cmap(idx), marker=markers[idx])
 
     X_test, y_test = X[test_idx, :], y[test_idx]
 
     plt.scatter(X_test[:, 0], X_test[:, 1], c='', alpha=1.0, linewidths=1, marker='o', s=55)
 
 
-print(random_stocks())
+# print(random_stocks())
 print("['ECL' 'AEP' 'AVY' 'CELG' 'DGX' 'AYI' 'MCK' 'ITW' 'AIV' 'XL' "
-      "'AON' 'PNR' 'MTD' 'TWX' 'LNT' 'DTE' 'MKC' 'TXN' 'NDAQ' 'DHI']")
+      "'AON' 'PNR' 'MTD' 'TWX' 'LNT' 'DTE' 'MKC' 'TXN' 'SO' 'JCI']")
 np.random.seed(0)
 X_xor = np.array([[2.244, 1.445], [0.2887, 0.684], [1.087, 1.137], [0.4234, 3.986], [0.2307, 1.375], [1.916, 2.135], [0.3194, 1.113], [0.5269, 2.613], [-0.9164, 0.7491], [0.8687, 6.473],
-                  [3.836, 1.125], [1.376, 1.754], [1.602, 1.510], [1.793, 1.430], [3.227, 1.088], [0.7805, 1.182], [5.668, 1.351], [14.43, 2.506], [1.056, 1.651], [0.0069, 5.416]])
+                  [3.836, 1.125], [1.376, 1.754], [1.602, 1.510], [1.793, 1.430], [3.227, 1.088], [0.7805, 1.182], [5.668, 1.351], [14.43, 2.506], [3.721, 1.019], [1.19, 1.174]])
 y_xor = np.array([-1, -1, 1, 1, -1, 1, -1, 1, -1, -1,
-                  1, -1, 1, 1, 1, 1, -1, 1, 1, 1])
+                  1, -1, 1, 1, 1, 1, -1, 1, -1, -1])
 
 plt.scatter(X_xor[y_xor == 1, 0],
             X_xor[y_xor == 1, 1],
@@ -57,8 +57,10 @@ plt.scatter(X_xor[y_xor == -1, 0],
             marker='s',
             label='Lost to the S&P 500')
 
+plt.xlabel('PEG Ratio')
+plt.ylabel('Current Ratio')
 plt.xlim(-1, 15)
-plt.ylim(-1, 15)
+plt.ylim(0, 7)
 plt.legend(loc='best')
 plt.tight_layout()
 plt.show()
@@ -67,14 +69,16 @@ plt.show()
 svm = SVC()
 # Train the classifier
 svm.fit(X_xor, y_xor)
-print("['ROST' 'SO' 'JCI' 'ALL' 'CBS' 'TGT' 'GILD' 'FCX' 'ES' 'KMB']")
-print('[1 -1 -1 1 -1 -1 -1 -1 -1 -1]')
-print(svm.predict([[0.7478, 1.467], [3.721, 1.019], [1.19, 1.174], [0.0116, 9.828], [0.4515, 1.580], [2.581, 1.177], [3.790, 1.224], [1.822, 3.232], [18.39, 0.5628], [2.468, 1.150]]))
+print("['ROST' 'ALL' 'CBS' 'TGT' 'GILD' 'FCX' 'ES' 'KMB' 'NDAQ' 'DHI']")
+print('[1 1 -1 -1 -1 -1 -1 -1 1 1]')
+print(svm.predict([[0.7478, 1.467], [0.0116, 9.828], [0.4515, 1.580], [2.581, 1.177], [3.790, 1.224], [1.822, 3.232], [18.39, 0.5628], [2.468, 1.150], [1.056, 1.651], [0.0069, 5.416]]))
 
 # Visualize the decision boundaries
 plot_decision_regions(X_xor, y_xor, classifier=svm)
+plt.xlabel('PEG Ratio')
+plt.ylabel('Current Ratio')
 plt.xlim(-1, 15)
-plt.ylim(-1, 15)
+plt.ylim(0, 7)
 plt.legend(loc='upper left')
 plt.tight_layout()
 plt.show()
